@@ -1,16 +1,25 @@
 const router = require('express').Router();
-const { Post } = require('../models');
+const { Blogpost } = require('../models');  // Update this to Blogpost
 const { withGuard } = require('../utils/authGuard');
 
 router.get('/', withGuard, async (req, res) => {
   try {
-    const postData = await Post.findAll({
+    console.log('Getting all posts for user:', req.session.user_id);
+
+    const postData = await Blogpost.findAll({
       where: {
-        userId: req.session.user_id,
+        user_id: req.session.user_id, // Sequelize maps this to user_id
       },
     });
 
+    console.log('Raw post data:', postData);  // Log the raw result from Sequelize
+
+    if (postData.length === 0) {
+      console.log('No posts found for user:', req.session.user_id);
+    }
+
     const posts = postData.map((post) => post.get({ plain: true }));
+    console.log('Mapped posts:', posts);  // Log the mapped posts
 
     res.render('dashboard', {
       dashboard: true,
@@ -18,6 +27,7 @@ router.get('/', withGuard, async (req, res) => {
       loggedIn: req.session.logged_in,
     });
   } catch (err) {
+    console.error('Error fetching posts:', err);
     res.status(500).json(err);
   }
 });
@@ -31,7 +41,7 @@ router.get('/new', withGuard, (req, res) => {
 
 router.get('/edit/:id', withGuard, async (req, res) => {
   try {
-    const postData = await Post.findByPk(req.params.id);
+    const postData = await Blogpost.findByPk(req.params.id);  // Update Post to Blogpost
 
     if (postData) {
       const post = postData.get({ plain: true });

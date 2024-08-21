@@ -1,8 +1,8 @@
 <div>
   <p>
-    {{body}}
+    {{comment.comment_text}}  
   </p>
   <p>
-    &mdash; {{user.username}}, {{formatDate createdAt}}
+    &mdash; {{comment.user.username}}, {{formatDate comment.createdAt}}
   </p>
 </div>

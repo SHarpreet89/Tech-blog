@@ -8,34 +8,38 @@ router.get('/', async (req, res) => {
       include: [User],
     });
 
-    const blogposts = blogData.map((post) => post.get({ plain: true }));
+    const Blogposts = blogData.map((post) => post.get({ plain: true }));
 
-    res.render('home', { blogposts, loggedIn: req.session.logged_in });
+    console.log('Found blog posts:', Blogposts);  // Log the found blog posts
+
+    res.render('home', { Blogposts, loggedIn: req.session.logged_in });
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 router.get('/post/:id', async (req, res) => {
   try {
     const blogData = await Blogpost.findByPk(req.params.id, {
       include: [
-        User,
         {
           model: Comment,
           include: [User],
         },
+        User,
       ],
     });
 
     if (blogData) {
-      const blogpost = blogData.get({ plain: true });
+      const Blogpost = blogData.get({ plain: true });
 
-      res.render('post', { blogpost, loggedIn: req.session.logged_in });
+      console.log('Blogpost data:', Blogpost); // Log to check data
+
+      res.render('post', { Blogpost, loggedIn: req.session.logged_in });
     } else {
       res.status(404).end();
     }
   } catch (err) {
+    console.error('Error fetching blog post:', err);
     res.status(500).json(err);
   }
 });

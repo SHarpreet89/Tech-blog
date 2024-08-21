@@ -4,12 +4,12 @@ const User = require('./User');
 
 // Define associations
 Blogpost.hasMany(Comment, {
-  foreignKey: 'blogpost_id',
+  foreignKey: 'Blogpost_id',
   onDelete: 'CASCADE',
 });
 
 Comment.belongsTo(Blogpost, {
-  foreignKey: 'blogpost_id',
+  foreignKey: 'Blogpost_id',
 });
 
 User.hasMany(Blogpost, {

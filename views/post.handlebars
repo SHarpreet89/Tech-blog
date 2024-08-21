@@ -1,26 +1,25 @@
 <div class="post">
   <article class="card">
     <div class="card-header flex-row justify-space-between">
-      <h2>{{post.title}}</h2>
+      <h2>{{Blogpost.title}}</h2>
       <div>
-        Posted by {{post.user.username}} on {{formatDate post.createdAt}}
+        Posted by {{Blogpost.user.username}} on {{formatDate Blogpost.createdAt}}
       </div>
     </div>
     <div class="card-body">
-      {{post.body}}
+      {{Blogpost.body}}
     </div>
   </article>
 
-  {{#if post.comments}}
-
+  {{#if Blogpost.comments}}
   <section class="card">
     <div class="card-header">
       <h3>Comments</h3>
     </div>
 
     <div class="card-body">
-      {{#each post.comments as |comment|}}
-      {{> comments}}
+      {{#each Blogpost.comments as |comment|}}
+      {{> comments comment=comment}}
       {{/each}}
     </div>
   </section>
@@ -32,16 +31,14 @@
     </div>
 
     <div class="card-body">
-      <input type="hidden" name="post-id" value="{{post.id}}" />
+      <input type="hidden" name="post-id" value="{{Blogpost.id}}" />
 
       <label class="form-label" for="comment-body">Comment</label>
-
       <textarea name="comment-body" class="form-input"></textarea>
 
       <button type="submit" class="btn">Submit</button>
     </div>
   </form>
-
 </div>
 
 <script src="/js/comment.js"></script>
