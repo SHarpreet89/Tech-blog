@@ -1,16 +1,16 @@
 const router = require('express').Router();
-const { Post, Comment, User } = require('../models/');
+const { Blogpost, Comment, User } = require('../models/');
 const { withGuard, withoutGuard } = require('../utils/authGuard');
 
 router.get('/', async (req, res) => {
   try {
-    const postData = await Post.findAll({
+    const blogData = await Blogpost.findAll({
       include: [User],
     });
 
-    const posts = postData.map((post) => post.get({ plain: true }));
+    const blogposts = blogData.map((post) => post.get({ plain: true }));
 
-    res.render('home', { posts, loggedIn: req.session.logged_in });
+    res.render('home', { blogposts, loggedIn: req.session.logged_in });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 
 router.get('/post/:id', async (req, res) => {
   try {
-    const postData = await Post.findByPk(req.params.id, {
+    const blogData = await Blogpost.findByPk(req.params.id, {
       include: [
         User,
         {
@@ -28,10 +28,10 @@ router.get('/post/:id', async (req, res) => {
       ],
     });
 
-    if (postData) {
-      const post = postData.get({ plain: true });
+    if (blogData) {
+      const blogpost = blogData.get({ plain: true });
 
-      res.render('post', { post, loggedIn: req.session.logged_in });
+      res.render('post', { blogpost, loggedIn: req.session.logged_in });
     } else {
       res.status(404).end();
     }
