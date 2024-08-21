@@ -11,12 +11,12 @@ BlogPost.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     content: {
-      type: DataTypes.TEXT, // To store long text for blog content
+      type: DataTypes.STRING, // To store long text for blog content
       allowNull: false,
     },
     date_created: {
