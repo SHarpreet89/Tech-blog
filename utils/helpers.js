@@ -5,7 +5,4 @@ module.exports = {
       return ''; 
     }
     
-    const formattedDate = new Date(date);
-    return formattedDate.toLocaleDateString(); 
-  },
-};
+    const formattedDate = new
