@@ -30,7 +30,7 @@ Comment.init(
     blogpost_id: {  
       type: DataTypes.INTEGER,
       references: {
-        model: 'Blogpost',
+        model: 'blogpost',
         key: 'id',
       },
     },
@@ -44,4 +44,4 @@ Comment.init(
   }
 );
 
-module.exports = Com
+module.exports = Comment;

@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const { Blogpost } = require('../../models/');
+const { blogpost } = require('../../models/');
 const { apiGuard } = require('../../utils/authGuard');
 
 router.post('/', apiGuard, async (req, res) => {
   const body = req.body;
 
   try {
-    const newBlogpost = await Blogpost.create({ ...body, user_id: req.session.user_id });
-    res.json(newBlogpost);
+    const newblogpost = await blogpost.create({ ...body, user_id: req.session.user_id });
+    res.json(newblogpost);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -15,7 +15,7 @@ router.post('/', apiGuard, async (req, res) => {
 
 router.put('/:id', apiGuard, async (req, res) => {
   try {
-    const [affectedRows] = await Blogpost.update(req.body, {
+    const [affectedRows] = await blogpost.update(req.body, {
       where: {
         id: req.params.id,
       },
@@ -33,7 +33,7 @@ router.put('/:id', apiGuard, async (req, res) => {
 
 router.delete('/:id', apiGuard, async (req, res) => {
   try {
-    const affectedRows = await Blogpost.destroy({
+    const affectedRows = await blogpost.destroy({
       where: {
         id: req.params.id,
       },
