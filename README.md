@@ -4,6 +4,14 @@
 
 This app runs a Tech Blog Website server, allowing useers to create, edit and comment on posts.
 
+## Deployed App Link
+
+This app is currently deployed on Render at the link below. 
+Please use any of the following uernames - Sal || Lernantino || Amiko with the password - password12345
+To test the application. Enjoy your visit.
+
+https://tech-blog-x5xm.onrender.com/
+
 ## Installation Instructions
 
 Install by typing NPM "Install" in project folder.

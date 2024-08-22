@@ -1,5 +1,6 @@
 :root {
   --primary: #eff3f0;
+  --listtext: #140442;
   --secondary: #9caea9;
   --tertiary: #ff9165;
   --mainTitle: #f94e7c;
@@ -79,7 +80,7 @@ input {
   display: block;
   margin: 5px 0;
   border-radius: var(--border-radius);
-  color: var(--primary);
+  color: var(--listtext);
   border: none;
   outline: none;
   background-color: var(--light-dark);
@@ -149,7 +150,7 @@ input {
   padding: 1.5%;
   border-radius: var(--border-radius);
   background-color: var(--light-dark);
-  color: var(--primary);
+  color: var(--listtext);
   text-decoration: none;
 }
 
