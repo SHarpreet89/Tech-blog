@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { Blogpost } = require('../models');  // Update this to Blogpost
+const { Post } = require('../models');  
 const { withGuard } = require('../utils/authGuard');
 
 router.get('/', withGuard, async (req, res) => {
   try {
     console.log('Getting all posts for user:', req.session.user_id);
 
-    const postData = await Blogpost.findAll({
+    const postData = await Post.findAll({
       where: {
         user_id: req.session.user_id, // Sequelize maps this to user_id
       },
@@ -41,7 +41,7 @@ router.get('/new', withGuard, (req, res) => {
 
 router.get('/edit/:id', withGuard, async (req, res) => {
   try {
-    const postData = await Blogpost.findByPk(req.params.id);  // Update Post to Blogpost
+    const postData = await Post.findByPk(req.params.id);  
 
     if (postData) {
       const post = postData.get({ plain: true });

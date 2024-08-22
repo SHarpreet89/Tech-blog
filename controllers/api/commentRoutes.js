@@ -7,7 +7,7 @@ router.post('/', apiGuard, async (req, res) => {
     console.log('New comment being added:', req.body); // Log to check what is being passed
     const newComment = await Comment.create({
       comment_text: req.body.comment_text,
-      blogpost_id: req.body.postId, // Ensure this is being set
+      post_id: req.body.postId, 
       user_id: req.session.user_id,
     });
 
